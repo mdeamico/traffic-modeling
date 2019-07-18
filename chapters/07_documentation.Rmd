@@ -1,0 +1,8 @@
+# Documentation
+
+Microsimulation documentation should provide the reader with detail regarding the inputs, assumptions, and outputs.
+The details should be sufficient so that the analysis can be checked and reproduced.
+This maximizes transparency of the analysis so that the end-users of the model know what they are getting and questions can be answered in the future.
+
+An outline of the model documentation could be:
+- TODO

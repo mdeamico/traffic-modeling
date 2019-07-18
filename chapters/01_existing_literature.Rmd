@@ -1,0 +1,15 @@
+# (PART) General Guidance{-}
+
+# Existing Resources
+
+Many existing resources exist on the topic of traffic microsimulation.
+Some information may be old, but still has value.
+Other information is cutting edge research, but applies to an academic-oriented audience.
+The following is a list of resources that have been found useful time after time.
+
+- [FHWA Traffic Analysis Toolbox](https://ops.fhwa.dot.gov/trafficanalysistools/index.htm), espcially [Volume III](https://ops.fhwa.dot.gov/trafficanalysistools/tat_vol3/vol3_guidelines.pdf)
+
+### State-Specific Traffic Analysis Guidance {-}
+```{r, echo=FALSE}
+htmltools::includeHTML("./figures/state_guidance_map.html")
+```

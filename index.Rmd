@@ -1,0 +1,34 @@
+---
+title: "Traffic Modeling"
+author: "Michael DeAmico and Collaborators"
+site: bookdown::bookdown_site
+documentclass: book
+---
+# Preface {-}
+
+This website provides a collection of thoughts on traffic modeling, specifically the practical application of microsimulation.
+The intent is to:
+
+- Provide a concise source of practical knowledge
+- Inspire collaboration between traffic engineers
+- Encourage better transportation decision making
+
+Existing guidance on traffic microsimulation has traditionally been passed down by word of mouth or found within state or federal guidance that have slow update cycles.
+This website is a living document, with all updates and discussions open for the community to see. 
+
+# License {- #license}
+
+```{r child='./_LICENSE.Rmd'}
+```
+
+# Contribute {-}
+
+Anyone can submit ideas, content, and revisions to this website.
+You do not need to know anything about website development, but you will need to learn a few concepts related to Github which provides the website hosting and issue tracking features.
+
+ - Anyone contributing must follow the [Code of Conduct](#code-of-conduct)
+ - Anyone contributing agrees to the [license](#license)
+
+```{r child='./_CONTRIBUTING.Rmd'}
+```
+

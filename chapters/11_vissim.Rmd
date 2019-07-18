@@ -1,0 +1,19 @@
+# (PART) Software-Specific Guidance {-}
+
+# Vissim {#Vissim-Model-Coding}
+
+Some introductory words regarding vissim.
+
+## Freeways
+
+- Components of a freeway
+  - Basic segments
+  - Merge
+  - Diverge
+  - Weave
+
+## Signalized Intersections
+
+## Roundabouts
+
+## Stop Control

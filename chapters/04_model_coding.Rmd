@@ -1,0 +1,7 @@
+# Existing Model Coding
+
+Each microsimulation software has its own features, limitations, and quirks.
+This chapter includes guidance how how to code networks. Software specific guidance can be found in Part II Software Specific Guidance.
+
+## Working as a Team
+TODO: how to organize a project, who does what, splitting up tasks, etc
