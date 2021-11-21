@@ -21,6 +21,11 @@ This website is a living document, with all updates and discussions open for the
 ```{r child='./_LICENSE.Rmd'}
 ```
 
+# Disclaimer {- #disclaimer}
+
+```{r child='./_disclaimer.Rmd'}
+```
+
 # Contribute {-}
 
 Anyone can submit ideas, content, and revisions to this website.
