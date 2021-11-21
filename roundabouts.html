@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>11.3 Roundabouts | Traffic Modeling</title>
+  <meta name="description" content="11.3 Roundabouts | Traffic Modeling" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="11.3 Roundabouts | Traffic Modeling" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="11.3 Roundabouts | Traffic Modeling" />
+  
+  
+  
+
+<meta name="author" content="Michael DeAmico and Collaborators" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="signalized-intersections.html"/>
+<link rel="next" href="stop-control.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i>License</a></li>
+<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html"><i class="fa fa-check"></i>Contribute</a>
+<ul>
+<li class="chapter" data-level="" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i>Code of Conduct</a></li>
+</ul></li>
+<li class="part"><span><b>I General Guidance</b></span></li>
+<li class="chapter" data-level="1" data-path="existing-resources.html"><a href="existing-resources.html"><i class="fa fa-check"></i><b>1</b> Existing Resources</a></li>
+<li class="chapter" data-level="2" data-path="model-scoping.html"><a href="model-scoping.html"><i class="fa fa-check"></i><b>2</b> Model Scoping</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="do-you-need-a-model-at-all.html"><a href="do-you-need-a-model-at-all.html"><i class="fa fa-check"></i><b>2.1</b> Do you Need A Model at All?</a></li>
+<li class="chapter" data-level="2.2" data-path="should-you-use-microsimulation.html"><a href="should-you-use-microsimulation.html"><i class="fa fa-check"></i><b>2.2</b> Should you use Microsimulation?</a></li>
+<li class="chapter" data-level="2.3" data-path="Other-Questions.html"><a href="Other-Questions.html"><i class="fa fa-check"></i><b>2.3</b> Additional Questions to Consider when Scoping</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-collection.html"><a href="data-collection.html"><i class="fa fa-check"></i><b>3</b> Data Collection</a></li>
+<li class="chapter" data-level="4" data-path="existing-model-coding.html"><a href="existing-model-coding.html"><i class="fa fa-check"></i><b>4</b> Existing Model Coding</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="working-as-a-team.html"><a href="working-as-a-team.html"><i class="fa fa-check"></i><b>4.1</b> Working as a Team</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="existing-model-calibration.html"><a href="existing-model-calibration.html"><i class="fa fa-check"></i><b>5</b> Existing Model Calibration</a></li>
+<li class="chapter" data-level="6" data-path="model-outputs.html"><a href="model-outputs.html"><i class="fa fa-check"></i><b>6</b> Model Outputs</a></li>
+<li class="chapter" data-level="7" data-path="documentation.html"><a href="documentation.html"><i class="fa fa-check"></i><b>7</b> Documentation</a></li>
+<li class="chapter" data-level="8" data-path="peer-review.html"><a href="peer-review.html"><i class="fa fa-check"></i><b>8</b> Peer Review</a></li>
+<li class="chapter" data-level="9" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>9</b> Forecasting</a></li>
+<li class="chapter" data-level="10" data-path="alternative-scenarios.html"><a href="alternative-scenarios.html"><i class="fa fa-check"></i><b>10</b> Alternative Scenarios</a></li>
+<li class="part"><span><b>II Software-Specific Guidance</b></span></li>
+<li class="chapter" data-level="11" data-path="Vissim-Model-Coding.html"><a href="Vissim-Model-Coding.html"><i class="fa fa-check"></i><b>11</b> Vissim</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="freeways.html"><a href="freeways.html"><i class="fa fa-check"></i><b>11.1</b> Freeways</a></li>
+<li class="chapter" data-level="11.2" data-path="signalized-intersections.html"><a href="signalized-intersections.html"><i class="fa fa-check"></i><b>11.2</b> Signalized Intersections</a></li>
+<li class="chapter" data-level="11.3" data-path="roundabouts.html"><a href="roundabouts.html"><i class="fa fa-check"></i><b>11.3</b> Roundabouts</a></li>
+<li class="chapter" data-level="11.4" data-path="stop-control.html"><a href="stop-control.html"><i class="fa fa-check"></i><b>11.4</b> Stop Control</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Traffic Modeling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="roundabouts" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Roundabouts</h2>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="signalized-intersections.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stop-control.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
