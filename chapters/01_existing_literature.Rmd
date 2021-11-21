@@ -11,5 +11,5 @@ The following is a list of resources that have been found useful time after time
 
 ### State-Specific Traffic Analysis Guidance {-}
 ```{r, echo=FALSE}
-htmltools::includeHTML("./figures/state_guidance_map.html")
+htmltools::includeHTML("./figures/01_existing_literature/state_guidance_map.html")
 ```
