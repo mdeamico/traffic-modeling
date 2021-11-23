@@ -1,8 +1,9 @@
-# (PART) Uncategorized {-}
+# (PART) Uncategorized {.unnumbered}
 
-# Number of Simulation Runs {- #n-runs}
+# Number of Simulation Runs {#n-runs .unnumbered}
+
 Traffic simulation models use randomness to manage uncertainty regarding inputs, parameters, and underlying assumptions.
-By repeatedly running the model with varied values, the output range of results reflects potential effects of uncertainty in the simulation process. 
+By repeatedly running the model with varied values, the output range of results reflects potential effects of uncertainty in the simulation process.
 Interpreting the range of results from a simulation model requires careful thinking in order to avoid the following:
 
     1. Avoid mis-representing uncertainty in the simulation process.
@@ -16,54 +17,57 @@ Statistical tools like averages, standard deviation, confidence intervals, t-tes
 
 To help answer the question *how many simulation runs are needed?* we can revisit the two mis-steps listed above.
 
-## Avoiding #1: Mis-representing Process Uncertainty
+## Avoiding \#1: Mis-representing Process Uncertainty
+
 We need to do *enough* simulation runs so that the sample average is representative of the overall simulation process (i.e. representative of the long-term process average, or population average).
 If we simply conduct one simulation run we have no way of knowing if it represents the overall simulation process; the next run simulation run could be very different due to the random components in the simulation model.
 By doing multiple runs, we can obtain a sample mean (average) and standard deviation and build a confidence interval.
 
-A [confidence interval](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) is a statement about the variability in the sampling process. (Also see [realated article](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm)) (Be careful if reading the [Wikipedia article](https://en.wikipedia.org/wiki/Confidence_interval) about confidence intervals, it is frequently edited and subject to controvercy.)
-Narrower intervals indicate less variability.
+A [confidence interval](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) is a statement about the variability in the sampling process.
+(Also see [realated article](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm)) (Be careful if reading the [Wikipedia article](https://en.wikipedia.org/wiki/Confidence_interval) about confidence intervals, it is frequently edited and subject to controversy.) Narrower intervals indicate less variability.
 For example if we take a sample of 30 simulation runs, and the mean is 29 with a 95% confidence interval of [28, 30], we could say that the sampling process has little variability when representing the overall simulation.
-However, if we take a sample of 5 runs, and the mean is 27 with a 95% confidence interval of [18, 36], by comparison, we could say that the sampling process has more variability in representing the overall simulation. If we took a different sample of 5 runs, a fairly different average and confidence interval might not be unexpected because of the higher variability. [TODO: make an interactive confidence interval demo](#).
+However, if we take a sample of 5 runs, and the mean is 27 with a 95% confidence interval of [18, 36], by comparison, we could say that the sampling process has more variability in representing the overall simulation.
+If we took a different sample of 5 runs, a fairly different average and confidence interval might not be unexpected because of the higher variability.
+[TODO: make an interactive confidence interval demo](#).
 
 TODO: show a figure of the sample distribution and population average.
 
-
-
-
 One formula for estimating sample size re-arranges the confidence interval formula to solve for N, the sample size:
+
 $$
 N \ge \left(\frac{1.96\sigma}{E}\right)^2
 $$
-where N = sample size, E = margin of error, and $\sigma$ = standard deviation.
 
-Confidence intervals let us infer an answer to the question of our sample results being considered normal for the simulation.
-This is a *separate question* from how the simulation compares to field data (calibration).
+where N = sample size, E = margin of error, and $\sigma$ = standard deviation. This formula assumes a 95% two-sided confidence interval, and that we know the simulation process standard deviation (population standard deviation). Assuming that the sample standard deviation is equal to population standard deviation may not be appropriate for small sample sizes, in which case an alternative formula using the t-statistic [TODO: show formula usin t-stat](#).
+
+### Margin of Error
+The margin of error, E, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average. The value of E is a judgement call. For example:
+
+- Some traffic engineering literature uses E = 10% of the sample mean. So if the sample mean is 15, then $E = 0.10 * 15 = 1.5$ This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
+- If E = $\sigma$, then $N \ge 1.96^2 \to N = 4$ simulation runs. This says that if 4 simulation runs are conducted, the resulting 95% confidence interval would be +/- one sample standard deviation.
+- Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding mis-step #1, confidence intervals let us infer an answer to the question of our sample results being considered normal for the simulation. This is a **separate question** from how the simulation compares to field data (calibration). Therefore, determining margin of error E does not need to depend on field data to avoid mis-step #1.
 
 The number of simulation runs does not distinguish a crappily calibrated model from a well-calibrated model.
 A tight confidence interval can be obtained from a simulation that is not-well calibrated by simply taking a large sample of runs.
-Conversly, a well-calibrated simulation might have a wide confidence interval, even with a large sample, if the underlying simulation is highly variable.
+Conversely, a well-calibrated simulation might have a wide confidence interval, even with a large sample, if the underlying simulation is highly variable.
 
-## Avoiding #2: Mis-interpreting Scenario Comparisons
+## Avoiding \#2: Mis-interpreting Scenario Comparisons
 
 estimate n runs using alpha and beta (1-power)
 
-
-
 Traffic simulation contrasts with deterministic traffic models.
 
-
-- Stochastic model does not produce a single number answer, but rather a distribution of answers.
- 
+-   Stochastic model does not produce a single number answer, but rather a distribution of answers.
 
 mis-match between simulation and field variability:
 
- simulation variability
- - noise in car following model
- - XX
+simulation variability
 
- field variability
- - XX
- - XX
+- noise in car following model
+- XX
 
-Notes:
+field variability
+
+- XX
+- XX
+
