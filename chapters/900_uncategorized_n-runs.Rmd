@@ -4,7 +4,7 @@
 
 **Key Points:**
 
-- XX
+- Not hard. Do 10 runs. Report confidence intervals. Do t-tests to make comparisons. If you suspect that the results are highly variable and are not comfortable with the precision obtained from 10 runs, do more runs. (TODO: Explain what 10 runs means in terms of power for estimating effect size.)
 - XX
 - XX
 
@@ -59,7 +59,6 @@ This formula also assumes a 95% two-sided confidence interval, and that we know 
 The margin of error, E, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results. **The value of E is a judgement call.** For example:
 
 - Some traffic engineering literature uses E = 10% of the sample mean. So if the sample mean is 15, then $E = 0.10 * 15 = 1.5$ This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
-- If $E = \sigma$, then $N \ge 1.96^2 \to N = 4$ simulation runs. This says that if 4 simulation runs are conducted, the resulting 95% confidence interval would be +/- one sample standard deviation.
 - Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding mis-step #1, confidence intervals let us infer an answer to the question regarding if our sample results are representative of the simulation. This is a **separate question** from how the simulation compares to field data (calibration). Therefore, determining margin of error E does not need to depend on field data to avoid mis-step #1. Assuming that variability in the field data is the same as the variability is a dangerous assumption **TODO, explain further...mis-match between simulation and field variability, sources of simulation variability (like car following model), sources of field variability**
 
 The number of simulation runs does not distinguish a crappily calibrated model from a well-calibrated model.
@@ -71,30 +70,30 @@ Comparisons between simulation models need to consider the distrubtion of simula
 Average results from two simulation scenarios may look different, but statistically may not be different due to the distribution, or uncertainty, surrounding the averages.
 The meaning of *statistically different* and *practically different* is another topic. Just because two results may be statistically different does not necessarily mean that the differences are important for real-world decision making.
 
-To comparing two independent samples (such as results from two simulation models, or comparing field data and simulation results), we can use a t-test (z-tests could be used if we are willing to assume that the population standard deviation is the same as the sample standard deviation). The formula to test for equality of two sample means (sample 1, sample 2) is as follows:
+To comparing two independent samples (such as results from two simulation models, or comparing field data and simulation results), we can use a [t-test or (z-test)](#).
+(TODO link to page demonstrating t-tests.)
+While t-tests can be used to compare two samples of any size, for example 10 simulation runs versus 15 field data points,
+the statistical power [TODO: explain power](#) of the test may suffer if the sample sizes are low.
+
+We can estimate the sample size needed to maintain high statistical power for detecting practical differences. The formula for is:
 
 $$
-t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{s^{2}_1 / N_1 + s^{2}_2/N_2}}
+N = 2\left ( z_{1-\alpha/2} + z_{1-\beta} \right )^{2}\left (\frac{\sigma}{\mu_1-\mu_2}  \right )^{2}
 $$
 
 where:
 
-$t$ = resulting test statistic to compare against a critical value
+$N$ = sample size needed for each scenario. Assumes equal sample sizes.
 
-$\bar{x}$ = sample mean
+$\sigma$ = standard deviation. The pooled variance is often used, which is essentially a weighted average. Using the higher standard deviation could also be considered for a more conservative estimate of $N$.
 
-$s$ = sample standard deviation
+$z_{1-\alpha/2}$ = z-value for controlling $\alpha$
 
-$N$ = sample size
+$z_{1-\beta}$ = z-value for controlling $\beta$
 
-TODO: explain critical test statistic, degrees of freedom
+$\mu_1-\mu_2$ = Desired difference in means.
 
-The t-test can be used to compare two samples of any size, for example 10 simulation runs versus 15 field data points. However, the statistical power [TODO: explain power](#) of the test may suffer if the sample sizes are low. The t-test formula could be re-arranged to solve for sample size given a desired confidence level ($1-\alpha$) and power ($1-\beta$). However, the iterative math gets complex with t-statistics. Instead we will assume the z-statistic and pooled standard deviation. TODO...can we do the math with the t-stat?
-
-$$
-N = 2\left ( z_{1-\alpha/2} + z_{1-\beta/2} \right )^{2}\left (\frac{\sigma}{\mu_1-\mu_2}  \right )^{2}
-$$
-
+TODO show rule of thumb for alpha = 0.05 and beta = 0.80 -> 16*sigma^2/diff^2
 
 
 ### Random thoughts

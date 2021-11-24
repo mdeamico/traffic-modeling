@@ -1,0 +1,29 @@
+The formula to test for equality of two sample means (sample 1, sample 2) is as follows:
+
+$$
+t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{s^{2}_1 / N_1 + s^{2}_2/N_2}}
+$$
+
+where:
+
+$t$ = resulting test statistic to compare against a critical value
+
+$\bar{x}$ = sample mean
+
+$s$ = sample standard deviation
+
+$N$ = sample size
+
+TODO: explain critical test statistic, degrees of freedom
+
+The t-test can be used to compare two samples of any size, for example 10 simulation runs versus 15 field data points.
+However, the statistical power [TODO: explain power](#) of the test may suffer if the sample sizes are low.
+The t-test formula could be re-arranged to solve for sample size given a desired confidence level ($1-\alpha$) and power ($1-\beta$).
+However, the iterative math gets complex with t-statistics.
+Instead we will assume the z-statistic and pooled standard deviation.
+TODO...can we do the math with the t-stat?
+
+$$
+N = 2\left ( z_{1-\alpha/2} + z_{1-\beta} \right )^{2}\left (\frac{\sigma}{\mu_1-\mu_2}  \right )^{2}
+$$
+
