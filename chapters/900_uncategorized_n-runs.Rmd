@@ -2,12 +2,19 @@
 
 # Number of Simulation Runs {#n-runs .unnumbered}
 
+**Key Points:**
+
+- XX
+- XX
+- XX
+
+### Overview {.unnumbered}
 Traffic simulation models use randomness to manage uncertainty regarding inputs, parameters, and underlying assumptions.
 By repeatedly running the model with varied values, the output range of results reflects potential effects of uncertainty in the simulation process.
 Interpreting the range of results from a simulation model requires careful thinking in order to avoid the following:
 
-    1. Avoid mis-representing uncertainty in the simulation process.
-    2. Avoid mis-interpreting comparisons between simulation scenarios.
+1. Avoid mis-representing uncertainty in the simulation process.
+2. Avoid mis-interpreting comparisons between simulation scenarios.
 
 The above mis-steps can be minimized with the help of statistics.
 Traffic simulation can be viewed as a random sampling problem.
@@ -17,7 +24,7 @@ Statistical tools like averages, standard deviation, confidence intervals, t-tes
 
 To help answer the question *how many simulation runs are needed?* we can revisit the two mis-steps listed above.
 
-## Avoiding \#1: Mis-representing Process Uncertainty
+## Avoiding \#1: Mis-representing Process Uncertainty {.unnumbered}
 
 We need to do *enough* simulation runs so that the sample average is representative of the overall simulation process (i.e. representative of the long-term process average, or population average).
 If we simply conduct one simulation run we have no way of knowing if it represents the overall simulation process; the next run simulation run could be very different due to the random components in the simulation model.
@@ -32,42 +39,63 @@ If we took a different sample of 5 runs, a fairly different average and confiden
 
 TODO: show a figure of the sample distribution and population average.
 
-One formula for estimating sample size re-arranges the confidence interval formula to solve for N, the sample size:
+One formula for estimating sample size re-arranges the one-sample z-test formula for comparing a sample to an unknown (constant) population average. Solving for sample size, the formula is as follows:
 
 $$
 N \ge \left(\frac{1.96\sigma}{E}\right)^2
 $$
 
-where N = sample size, E = margin of error, and $\sigma$ = standard deviation. This formula assumes a 95% two-sided confidence interval, and that we know the simulation process standard deviation (population standard deviation). Assuming that the sample standard deviation is equal to population standard deviation may not be appropriate for small sample sizes, in which case an alternative formula using the t-statistic [TODO: show formula usin t-stat](#).
+where:
 
-### Margin of Error
-The margin of error, E, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average. The value of E is a judgement call. For example:
+$N$ = sample size
+
+$E$ = margin of error
+
+$\sigma$ = standard deviation.
+
+This formula also assumes a 95% two-sided confidence interval, and that we know the simulation process standard deviation (population standard deviation). Assuming that the sample standard deviation is equal to population standard deviation may not be appropriate for small sample sizes, in which case an alternative formula using the t-statistic [TODO: show formula using t-stat](#).
+
+### Margin of Error {.unnumbered}
+The margin of error, E, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results. **The value of E is a judgement call.** For example:
 
 - Some traffic engineering literature uses E = 10% of the sample mean. So if the sample mean is 15, then $E = 0.10 * 15 = 1.5$ This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
-- If E = $\sigma$, then $N \ge 1.96^2 \to N = 4$ simulation runs. This says that if 4 simulation runs are conducted, the resulting 95% confidence interval would be +/- one sample standard deviation.
-- Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding mis-step #1, confidence intervals let us infer an answer to the question of our sample results being considered normal for the simulation. This is a **separate question** from how the simulation compares to field data (calibration). Therefore, determining margin of error E does not need to depend on field data to avoid mis-step #1.
+- If $E = \sigma$, then $N \ge 1.96^2 \to N = 4$ simulation runs. This says that if 4 simulation runs are conducted, the resulting 95% confidence interval would be +/- one sample standard deviation.
+- Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding mis-step #1, confidence intervals let us infer an answer to the question regarding if our sample results are representative of the simulation. This is a **separate question** from how the simulation compares to field data (calibration). Therefore, determining margin of error E does not need to depend on field data to avoid mis-step #1. Assuming that variability in the field data is the same as the variability is a dangerous assumption **TODO, explain further...mis-match between simulation and field variability, sources of simulation variability (like car following model), sources of field variability**
 
 The number of simulation runs does not distinguish a crappily calibrated model from a well-calibrated model.
 A tight confidence interval can be obtained from a simulation that is not-well calibrated by simply taking a large sample of runs.
 Conversely, a well-calibrated simulation might have a wide confidence interval, even with a large sample, if the underlying simulation is highly variable.
 
-## Avoiding \#2: Mis-interpreting Scenario Comparisons
+## Avoiding \#2: Mis-interpreting Scenario Comparisons {.unnumbered}
+Comparisons between simulation models need to consider the distrubtion of simulation outputs and not simply compare averages in order to minimize reporting differences that could be due to random chance.
+Average results from two simulation scenarios may look different, but statistically may not be different due to the distribution, or uncertainty, surrounding the averages.
+The meaning of *statistically different* and *practically different* is another topic. Just because two results may be statistically different does not necessarily mean that the differences are important for real-world decision making.
 
-estimate n runs using alpha and beta (1-power)
+To comparing two independent samples (such as results from two simulation models, or comparing field data and simulation results), we can use a t-test (z-tests could be used if we are willing to assume that the population standard deviation is the same as the sample standard deviation). The formula to test for equality of two sample means (sample 1, sample 2) is as follows:
 
-Traffic simulation contrasts with deterministic traffic models.
+$$
+t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{s^{2}_1 / N_1 + s^{2}_2/N_2}}
+$$
 
--   Stochastic model does not produce a single number answer, but rather a distribution of answers.
+where:
 
-mis-match between simulation and field variability:
+$t$ = resulting test statistic to compare against a critical value
 
-simulation variability
+$\bar{x}$ = sample mean
 
-- noise in car following model
-- XX
+$s$ = sample standard deviation
 
-field variability
+$N$ = sample size
 
-- XX
-- XX
+TODO: explain critical test statistic, degrees of freedom
 
+The t-test can be used to compare two samples of any size, for example 10 simulation runs versus 15 field data points. However, the statistical power [TODO: explain power](#) of the test may suffer if the sample sizes are low. The t-test formula could be re-arranged to solve for sample size given a desired confidence level ($1-\alpha$) and power ($1-\beta$). However, the iterative math gets complex with t-statistics. Instead we will assume the z-statistic and pooled standard deviation. TODO...can we do the math with the t-stat?
+
+$$
+N = 2\left ( z_{1-\alpha/2} + z_{1-\beta/2} \right )^{2}\left (\frac{\sigma}{\mu_1-\mu_2}  \right )^{2}
+$$
+
+
+
+### Random thoughts
+t-test is a detective, not a jury.
