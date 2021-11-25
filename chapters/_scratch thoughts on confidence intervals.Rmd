@@ -1,0 +1,7 @@
+
+A [confidence interval](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm) is a statement about the variability in the sampling process.
+(Also see [realated article](https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm)) (Be careful if reading the [Wikipedia article](https://en.wikipedia.org/wiki/Confidence_interval) about confidence intervals, it is frequently edited and subject to controversy.) Narrower intervals indicate less variability.
+For example if we take a sample of 30 simulation runs, and the mean is 29 with a 95% confidence interval of [28, 30], we could say that the sampling process has little variability when representing the overall simulation.
+However, if we take a sample of 5 runs, and the mean is 27 with a 95% confidence interval of [18, 36], by comparison, we could say that the sampling process has more variability in representing the overall simulation.
+If we took a different sample of 5 runs, a fairly different average and confidence interval might not be unexpected because of the higher variability.
+[TODO: make an interactive confidence interval demo](#).
