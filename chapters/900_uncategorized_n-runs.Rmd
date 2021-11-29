@@ -10,7 +10,7 @@
 
 ### Overview {.unnumbered}
 Traffic simulation models use randomness to manage uncertainty regarding inputs, parameters, and underlying assumptions.
-By repeatedly running the model with varied values, the output range of results reflects potential effects of uncertainty in the simulation process.
+By repeatedly running the model with slight random changes, the output range of results reflects potential effects of uncertainty in the simulation.
 Interpreting the range of results from a simulation model requires careful thinking in order to avoid the following mis-steps:
 
 1. Avoid mis-representing uncertainty in the simulation process.
@@ -18,7 +18,7 @@ Interpreting the range of results from a simulation model requires careful think
 
 These two mis-steps can be minimized with the help of statistics.
 Traffic simulation can be viewed as a random sampling problem.
-The simulation process produces different results for each simulation run.
+Randomness in the simulation produces different results for each simulation run.
 While we cannot physically run the model an infinite number of times to obtain the true average, we can take a sample of several runs to make inferences about the overall process.
 Statistical tools like averages, standard deviation, confidence intervals, t-tests, and others can help us interpret the sampled results.
 
@@ -26,14 +26,26 @@ To help answer the question *how many simulation runs are needed?* we can revisi
 
 ## Avoiding \#1: Mis-representing Process Uncertainty {.unnumbered}
 
-We need to do *enough* simulation runs so that the sample average is representative of the overall simulation process (i.e. representative of the long-term process average, or population average).
-If we simply conduct one simulation run we have no way of knowing if it is representative; the next run simulation run could be very different due to the random components in the simulation model.
-By collecting results from multiple runs, we can obtain a sample mean (average), standard deviation, and build a [confidence interval](#).
+How to estimate the number of runs required to avoid mis-step #1:
 
+1. Conduct an initial set of runs.
+Doing 10 runs is suggested, if this amount is practical in terms of computation time.
+2. Use the [formula](#) discussed below to estimate how many runs would be required to obtain a user-specified [margin of error](#).
+3. If the formula suggests you need to do more simulation runs, either conduct the additional runs if practical, or adjust your expectations regarding margin of error and/or confidence level.
+Accepting a wider margin of error or lower confidence level may be necessary in order to maintain a practical number of runs.
+4. Report performance measure results based on the final number of runs.
+Use the t-statistic when reporting confidence intervals or doing paired tests.
+
+### Background {.unnumbered}
+We need to do *enough* simulation runs so that the sample average is representative of the overall simulation process (i.e. representative of the long-term process average, or population average).
+If we simply conduct one simulation run, we have no way of knowing if it is representative; the next run simulation run could be very different due to the random components in the simulation model.
+By collecting results from multiple runs, we can obtain a sample mean (average), standard deviation, and build a [confidence interval](#) to represent the overall simulation process.
 
 TODO: show a figure of the sample distribution and population average.
 
-One formula for estimating sample size re-arranges the one-sample z-test formula for comparing a sample to an unknown (constant) population average. Solving for sample size, the formula is as follows:
+### Formula {.unnumbered}
+Estimating *how many runs is enough* can be accomplished by re-arranging the confidence interval formula.
+Solving for sample size, the formula is as follows:
 
 $$
 N \ge \left(\frac{z_{\alpha/2}*\sigma}{E}\right)^2
@@ -45,29 +57,53 @@ $N$ = sample size
 
 $E$ = margin of error
 
-$\sigma$ = standard deviation.
+$\sigma$ = standard deviation
 
 $z_{\alpha/2}$ = Critical z-statistic (1.96 for a 95% confidence interval)
 
-This formula assumes that we know the simulation process standard deviation (population standard deviation). Assuming that the sample standard deviation is equal to population standard deviation may not be appropriate for small sample sizes, in which case an alternative formula using the t-statistic [TODO: show formula using t-stat](#).
+This formula provides a practical way to estimate the number of runs required to represent the overall simulation process, but it does come with assumptions:
+
+- Using the z-statistic makes the math easier, but is less accurate for small sample sizes $(N < 30)$.
+- The sample standard deviation is assumed to represent the population standard deviation $\sigma$.
+
+Using the z-statistic is close enough for practical purposes because the formula is simply an estimate based on an initial trial number of runs.
+You may have to go back and conduct more runs if the initial trial was smaller than the estimated size required by the formula.
+
+- When reporting confidence intervals for final results, or conducting statistical comparisons, the t-statistic should be used to be conservative, especially for small samples $(N < 30)$.
 
 ### Margin of Error {.unnumbered}
-The margin of error, $E$, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results. **The value of $E$ is a judgement call.** For example:
+The margin of error, $E$, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results.
+**The value of $E$ is a judgement call.** 
+The analyst must decide how wide of a confidence interval is too wide to be useful given the context of the problem they are trying to solve and the constraints they are working within.
+Their decision is not a matter of statistics, but rather a matter of practical application.
+Here are some examples regarding choosing $E$:
 
-- Some traffic engineering literature uses $E = 10%$ of the sample mean. So if the sample mean is 15, then $E = 0.10 * 15 = 1.5$ This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
-- Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding mis-step #1, confidence intervals let us infer an answer to the question regarding if our sample results are representative of the simulation.
-This is a **separate question** from how the simulation compares to field data (calibration).
-Therefore, determining margin of error E does not need to depend on field data to avoid mis-step #1.
-Assuming that variability in the field data is the same as the variability in the simulation may not be appropriate, or may lead to unreasonable sample sizes due to the following:
- 
-    - **TODO:** explain mismatch between field and simulation variability
-    - **TODO:** explain mismatch between sources of variability (field vs sim)
-    - XX
-
+- Some traffic engineering literature uses $E = 10%$ of the sample mean.
+  So if the sample mean is 15, then $E = 0.10 * 15 = 1.5$
+  This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
+- Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#)
+  However, going back to the root of avoiding mis-step #1, the goal of the confidence interval is to answer to the question *are the sample results representative of the overall simulation process?*
+  This question is a *separate question* from how the simulation compares to field data (calibration), which is more related to estimating sample sizes for [comparing scenarios](#).
+  For the purposes of avoiding mis-step #1, choosing an acceptable margin of error E is entirely concerned with the simulation process, not field data.
+  Using field variability to estimate simulation sample size may not be appropriate, or may lead to unreasonable sample sizes.
+  Especially if there is a mismatch between the field and simulated sources, or magnitude, of variability.
+    - For example, the field data may come from a relatively homogenous group of observations with little variability.
+      However, there may be underlying assumptions (or errors that need to be fixed) in a simulation model that lead to higher variability in the simulation outputs.
+      Expecting low variability in the simulation results could lead to a high number of runs.
+      Attempting to control the simulation variability may create an unrealistic expectation that the simulation should act deterministically and could tempt the analyst to overconstrain model parameters.
+      Neither attempting to control the variability, nor conducting a high number of runs is efficient from a practical perspective.
+    - The literature recognizes that using field data could lead to a high number of runs and suggests 5% of the mean as a minimum margin of error ([2019 TAT III](#)).
+      If using a 5% minimum based on judgement, then why not just use 5% as a conservative value instead of making assumptions based on field data?
+      If 5% requires too many runs to be practical, then try 10% or other compromise, or do the minimum practical number of runs that the analyst feels can still produce a reasonable estimate (confidence interval) for the simulation average.
+      (If considering the number of runs required for comparing scenarios, see discussion on [mis-step #2](#).)
 
 The number of simulation runs does not distinguish a crappily calibrated model from a well-calibrated model.
 A tight confidence interval can be obtained from a simulation that is not-well calibrated by simply taking a large sample of runs.
 Conversely, a well-calibrated simulation might have a wide confidence interval, even with a large sample, if the underlying simulation is highly variable.
+
+### Examples {.unnumbered}
+
+**TODO include examples of how to use the formula**
 
 ## Avoiding \#2: Mis-interpreting Scenario Comparisons {.unnumbered}
 Comparisons between simulation models need to consider the distrubtion of simulation outputs and not simply compare averages in order to minimize reporting differences that could be due to random chance.
@@ -90,7 +126,7 @@ $N$ = sample size needed for each scenario. Assumes equal sample sizes.
 
 $\sigma$ = standard deviation. The pooled variance is often used, which is essentially a weighted average. Using the higher standard deviation could also be considered for a more conservative estimate of $N$.
 
-$z_{1-\alpha/2}$ = z-value for controlling $\alpha$, typically 1.96 for 95% confidence
+$z_{1-\alpha/2}$ = z-value for controlling $\alpha$, typically 1.96 for 5% significance
 
 $z_{1-\beta}$ = z-value for controlling $\beta$, typically 0.84 for 80% power.
 
@@ -102,9 +138,15 @@ $$
 N \ge 16 \left (\frac{\sigma}{\mu_1-\mu_2} \right )^{2}
 $$
 
+**TODO** show example tables of n-runs vs effect size
 
 
-### Random thoughts
+### Random thoughts {.unnumbered}
 t-test is a detective, not a jury.
+
 If you are using a t-test to decide if two simulation models are difference, then the difference between alternatives probably too small to be practical (i.e. if the simulation results are not painfully different, then the real-world differences are probably not going to be practically different)
 
+2004 TAT III appendix talks about sample size estimation for confidence intervals and t-tests, seems similar to "mis-steps" idea.
+
+use z instead of t as a simplifying assumption to make the math easier for the purposes of estimating sample size. We're making estimates of sigma, delta, so it's an approximate formula anyway.
+when reporting actual results or doing comparisons, recommend using t-dist.
