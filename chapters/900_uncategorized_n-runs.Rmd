@@ -5,13 +5,13 @@
 **Key Points:**
 
 - Not hard. Do 10 runs. Report confidence intervals. Do t-tests to make comparisons. If you suspect that the results are highly variable and are not comfortable with the precision obtained from 10 runs, do more runs. (TODO: Explain what 10 runs means in terms of power for estimating effect size.)
-- XX
+- if using stats to distinguish b/n alternatives, then the differences are probably not practically significant. Use stats to avoid thinking there is a difference when there is not.
 - XX
 
 ### Overview {.unnumbered}
-Traffic simulation models use randomness to manage uncertainty regarding inputs, parameters, and underlying assumptions.
-By repeatedly running the model with slight random changes, the output range of results reflects potential effects of uncertainty in the simulation.
-Interpreting the range of results from a simulation model requires careful thinking in order to avoid the following mis-steps:
+Traffic simulation models use random variables to mimic distributions of real-world phenomena such as vehicle departure times, traffic compositions (mix of passenger cars & trucks), driver behaviors, and others.
+By repeatedly running the model with various random changes, the output reflects the potential range of results that could be expected from the simulation.
+Interpreting the range of results requires careful thinking in order to avoid the following mis-steps:
 
 1. Avoid mis-representing uncertainty in the simulation process.
 2. Avoid mis-interpreting comparisons between simulation scenarios.
@@ -33,6 +33,8 @@ Doing 10 runs is suggested, if this amount is practical in terms of computation 
 2. Use the [formula](#) discussed below to estimate how many runs would be required to obtain a user-specified [margin of error](#).
 3. If the formula suggests you need to do more simulation runs, either conduct the additional runs if practical, or adjust your expectations regarding margin of error and/or confidence level.
 Accepting a wider margin of error or lower confidence level may be necessary in order to maintain a practical number of runs.
+A wide margin of error or lower confidence level does not mean that the model is somehow bad or useless, it just means that the final results may not be as precise as originally intended.
+Using statistics can help avoid erroneous conclusions when comparing simultaion outputs with high variance.
 4. Report performance measure results based on the final number of runs.
 Use the t-statistic when reporting confidence intervals or doing paired tests.
 
@@ -117,12 +119,18 @@ While t-tests can be used to compare two samples of any size, the statistical po
 We can estimate the sample size needed to maintain high statistical power for detecting practical differences. The formula for is:
 
 $$
-N = 2\left ( z_{1-\alpha/2} + z_{1-\beta} \right )^{2}\left (\frac{\sigma}{\mu_1-\mu_2}  \right )^{2}
+N = 2\left ( z_{1-\alpha/2} + z_{1-\beta} \right )^{2} (\frac{1}{d})^{2}
 $$
 
 where:
 
 $N$ = sample size needed for each scenario. Assumes equal sample sizes.
+
+$d$ = effect size. This is a relative metric calculated as $d = \frac{\mu_1-\mu_2}{\sigma}$, or in other words, a normalized difference between means. The difference is normalized by an estimate of the population standard deviation. Statistics literature on effect size discusses Cohen's d, Hedges' g, Glass's $\Delta$, amonst others. All of these differ in the way that they normalize the difference between means (i.e. differing estimates of standard deviation, $\sigma$). Here is a suggestion:
+
+- Use the pooled standard deviation ($\sigma_p$) if the ratio between the variances is approximately between 0.5 and 2.0. This range is a rule-of-thumb for when standard deviations are "close enough" to be pooled.
+- If not using the pooled standard deviation, use the larger $\sigma$ to be conservative.
+- Try a few different estimates of $\sigma$ to see how sensitive $N$ is. You may need an interative trial-and-error approach to find a reasonable balance between sample size and effect size.
 
 $\sigma$ = standard deviation. The pooled variance is often used, which is essentially a weighted average. Using the higher standard deviation could also be considered for a more conservative estimate of $N$.
 
@@ -150,3 +158,9 @@ If you are using a t-test to decide if two simulation models are difference, the
 
 use z instead of t as a simplifying assumption to make the math easier for the purposes of estimating sample size. We're making estimates of sigma, delta, so it's an approximate formula anyway.
 when reporting actual results or doing comparisons, recommend using t-dist.
+
+
+rule of thumb for estimating if variances can be pooled:
+Divide variances.
+If result is b/n 0.5 to 2.0 then they can be pooled.
+https://online.stat.psu.edu/stat500/lesson/7/7.3/7.3.1/7.3.1.1
