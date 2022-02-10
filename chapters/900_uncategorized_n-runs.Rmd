@@ -2,11 +2,15 @@
 
 # Number of Simulation Runs {#n-runs .unnumbered}
 
-**Traffic simulation models need to be run more than once to account for their random nature.** Using results from one model run is like rolling a pair of dice that land on double sixes, then proclaiming that 12 is the typical outcome. Averaging results from multiple rolls is necessary to arrive at the typical sum of two dice (the typical sum is 7). Likewise, one simulation run is probably not enough to estimate the typical simulation model output. The question is then how many simulation runs are needed? A practical approach to answering this question is as follows (assuming a typical traffic analysis process that starts by developing an existing conditions model before developing alternative scenario models):
+**Traffic simulation models need to be run more than once to account for their random nature.** Using results from one model run is like rolling a pair of dice that land on double sixes, then proclaiming that 12 is the typical outcome. Averaging results from multiple rolls is necessary to arrive at the typical sum of two dice[^uncategorized_n-runs-1]. Likewise, one simulation run is probably not enough to estimate the typical simulation model output. The question is then how many simulation runs are needed? A practical approach to answering this question is as follows (assuming a typical traffic analysis process that starts by developing an existing conditions model before developing alternative scenario models): [@R-base]
+
+[^uncategorized_n-runs-1]: The typical sum of two dice is 7.
 
 1.  **Conduct 10 simulation runs as a practical starting point**. [(Why 10 runs?)](#)
 
     -   If the simulation is too expensive (in terms of time or money) to do 10 runs, then do as many runs as resources allow. The exact number of runs is not important as long as results are presented and interpreted appropriately with the help of statistics.
+
+    While this discussion contains a lot of "words and math," not over-complicating the topic of number of simulation runs is encouraged. The most important part is that the analyst is doing more than one run and the results are being presented and interpreted correctly. The remainder of the steps discussed below, however, are useful to better understand the variability in the simulation.
 
 2.  **Choose a measure of effectiveness (MOE) and location of interest in the model.** The MOE and location should be related to the purpose of the model and be important for decision making. For example, if the purpose of the model is to investigate how an alternative may affect travel time along a particular section, then choosing the travel time between two critical points in the model would be appropriate. Another example could be choosing level of service at an intersection where alternative configurations are being considered.
 
@@ -16,114 +20,55 @@
 
     Consider an example:
 
-    -   10 simulation runs
+    -   10 simulation runs of an existing conditions model
     -   Average travel time = 10 minutes
     -   Standard deviation = 0.75 minutes
     -   Margin of error = 0.5 minutes at the 95% confidence level.
 
-    Inspecting the margin of error suggests that the true simulation average in this example is estimated to be between 9.5 and 10.5 minutes.[^uncategorized_n-runs-1] Further, based on the standard deviation and [minimum effect size for 10 runs](#), t-tests in this example could be expected to distinguish alternatives that differ by 1.0 minute or more. The analyst and decision makers must decide if this level of precision is acceptable for the project.
+    The margin of error suggests that the true simulation average in this example is estimated to be between 9.5 and 10.5 minutes.[^uncategorized_n-runs-2] Further, based on the standard deviation and [minimum effect size for 10 runs](#), t-tests in this example could be expected to distinguish alternatives that differ by approximately 1.0 minute or more. The analyst and decision makers must decide if this level of precision is acceptable for the project.
 
-    Inspecting margin of error and effect size is an engineering judgement call, and is not a matter of statistics [[1]](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html). **There is no magic formula that can decide if the precision obtained from 10 runs is of practical importance.** In the above example, is it ok if the true simulation average is being estimated within $\pm$ 0.5 minutes? Would project decisions change if alternatives were different by less than 1.0 minute? If so, then more simulation runs should be considered to increase precision in the results. Keep in mind that more runs comes at potential increased resource costs and does not necessarily increase model quality [(see discussion regarding interpreting statistics)](#).
+    Inspecting margin of error and effect size is an engineering judgement call, and is not a matter of statistics [[1]](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html). **There is no magic formula that can decide if the precision obtained from 10 runs is of practical importance.** In the above example, does the true simulation average need to be estimated more precisely than $\pm$ 0.5 minutes? Would project decisions change if alternatives were different by less than 1.0 minute? If the answer to either question is 'yes', then more simulation runs should be considered to increase precision in the results. Keep in mind that more runs comes at potential increased resource costs and does not necessarily increase model quality [(see discussion regarding interpreting statistics)](#).
 
-    -   Some traffic engineering literature suggests using 5% or 10% of the mean as an acceptable margin of error. While this provides a starting point, the relative percentages are arbitrary that may or may not provide reasonable ranges depending on the units of the performance measure and inherent variability in the simulation. Inspecting the absolute range, not just the relative range, of the margin of error is encouraged when judging acceptable precision.
+    -   Some traffic engineering literature suggests using 5% or 10% of the mean as an acceptable margin of error. While this provides a starting point, the relative percentages are arbitrary. They may or may not provide reasonable ranges depending on the units of the performance measure and inherent variability in the simulation. Inspecting the absolute range, not just the relative range, of the margin of error is encouraged when judging acceptable precision. [(See additional discussion.)](#)
 
-5.  **Do more runs if the results from 10 runs are not precise enough to support project decisions.** If the precision is too low, differences between alternatives may be indistinguishable. Statistical t-tests help avoid making erroneous conclusions. For example, consider two alternatives that have average travel times of 9.8 minutes and 10.2 minutes. Depending on the variability in the simulation, the apparent difference between the averages may be due to random chance (i.e. statistically insignificant).
+5.  **Do more runs if the results from 10 runs are not precise enough to support project decisions.** If the precision is too low, differences between alternatives may be indistinguishable. Statistical t-tests help avoid making erroneous conclusions. For example, consider two alternatives that have average travel times of 9.8 minutes and 10.2 minutes. Depending on the variability in the simulation, the apparent difference between the averages may be due to random chance (i.e. statistically insignificant) and concluding they are different would be a misinterpretation of the results.
 
-    Use the [sample size formula related to effect size](#) to help estimate the required number of runs to achieve statistically significant results for comparing alternatives. The [sample size formula related to margin of error](#) can also be used to estimate the number of runs required to report the results from one model with a narrower confidence interval.
+    Use the [sample size formula related to effect size](#) to help estimate the required number of runs to achieve statistically significant results for comparing alternatives. The [sample size formula related to margin of error](#) can also be used to estimate the number of runs required to achieve the desired precision from one model.
 
     It is possible for the sample size formulas to return an impractical number of runs. In these cases, either decrease the desired confidence level and/or increase the acceptable margin of error to obtain a practical number of runs, or accept that the model may not have the precision to distinguish alternatives. Neither of these outcomes necessarily mean that the model is bad or wrong. However, the results may require more careful interpretation and communication.
 
-[^uncategorized_n-runs-1]: The true simulation average is unknown; it could be 12 minutes, or some other other value. Repeatedly doing 10 runs and constructing a confidence interval for each repetion would be expected to capture the true average 95% of the time; there is no way to know if any one particular confidence interval actually captured the true average.
+[^uncategorized_n-runs-2]: The true simulation average is unknown; it could be 12 minutes, or some other other value. Repeatedly doing 10 runs and constructing a confidence interval for each repetion would be expected to capture the true average 95% of the time; there is no way to know if any one particular confidence interval actually captured the true average.
 
-While this discussion contains a lot of "words and math," not over-complicating the topic of number of simulation runs is encouraged. As noted in the [ODOT guidelines](#), 10 runs often reasonable represents the true simulation average, but checking with the statistical formulas is useful to better understand the variability in the simulation.
+## Why 10 runs? {.unnumbered}
 
-1.  interval would be 10 minutes $\pm$ 0.27 minutes. a confidence interval for travel time of 10.0 minutes $\pm$ 1.0 minute at the 95% confidence level. The "$\pm$ 1.0 minute at 95% confidence" margin of error reflects the process uncertainty.
-
-2.  
-
-Rather than having a preconceived expectation of how precise model results should be...
-
-E = 10% or 5% is arbitrary
-
-1.  For example, consider 10 runs that results in a confidence interval for travel time of 10.0 minutes $\pm$ 1.0 minute at the 95% confidence level. The "$\pm$ 1.0 minute at 95% confidence" margin of error reflects the process uncertainty. The true simulation average in this example is estimated to be between 9 and 11 minutes.[^uncategorized_n-runs-2] There is no magic formula that can decide if that level of uncertainty is of practical importance. TODO: discuss what to do if E seems high. Proceed to step 5.... adjust expectations.... etc..... Reading the [margin of error discussion](#) is encouraged for further understanding of this topic.
-
-[^uncategorized_n-runs-2]: (The true simulation average is unknown; it could be 12 minutes, or some other other value. Repeatedly doing 10 runs and constructing confidence intervals would be expected to capture the true average 95% of the time; there is no way to know if any one particular actually captured the true average. TODO convert to margin note somehow?)
-
-```{=html}
-<!-- -->
-```
-5.  **Inspect the minimum detectable effect size.** TODO
-
-6.  
-
-7.  However, statistical significance and practical Statistical confidence should not be confused with model correctness and usefulness.
-
-Statistical comparisons may be more important with a lower number of runs to help avoid erroneous conclusions.
-
-Results from 10 runs can be reported with their standard deviation and/or confidence intervals to reflect the simulation process variability. If the analyst is not comfortable with the precision obtained from 10 runs, then more runs can be done if resources allow. Analyst discomfort may come from wide confidence intervals or insignificant results from t-tests, neither of which necessarily mean that the model is bad or wrong. However, the results may require more careful interpretation.
-
-1.  The margin of error for a given confidence level reflects the uncertainty in the estimated average. (TODO: delete? A smaller margin of error means a more precise estimate of the of the true simulation average.)
-
-**Why 10 runs?**
-
-TODO:...Has both statistical and practical merit. (ODOT 10 runs minimum, VDOT 10 runs minimum)
+TODO:...Ten runs has both statistical and practical merit. Practical guides developed over time have included 10 runs as a minium (ODOT 10 runs minimum, VDOT 10 runs minimum). ODOT goes as far as saying...sufficient for estimating average...
 
 Ten runs is as good as any place to start for obtaining model results (averages and standard deviations). Refining the number of runs requires two things: (1) having an estimate of the model's standard deviation, which can be obtained from the initial set of 10 runs, and (2) having a clear objective of the simulation, which is typically to compare two or more alternatives. The sufficiency of 10 runs for statistically comparing alternatives can be checked by considering effect size.
 
 **10 runs is enough to allow statistical comparisons (t-tests) to detect an [effect size](#) of 1.32** (assuming 95% confidence and 80% power). Multiplying effect size by standard deviation provides an estimate of the smallest statistically detectable difference between results. For example, if two alternative simulations are conducted with 10 runs each and the simulated travel time results have a standard deviation of 0.75 minutes, then t-tests could detect approximately 1.0 minute or larger differences between the alternatives (1.32 \* 0.75 minutes). Smaller standard deviation or more runs allow statistical detection of smaller differences. TODO: See XX for a discussion regarding estimating samples for a given effect size. TODO: provide tables, examples.
 
-### **A few notes about statistics** {#stat-notes .unnumbered}
-
--   **Statistics are useful to avoid concluding that two results are different when they may not be.** For example, if one model has an average travel time of 10.0 minutes, and an alternative model has an average of 9.7 minutes. The difference between results could be due to random chance if the model variability is high enough and/or the number of runs is too low to detect a difference of 0.3 minutes. If a t-test comes back statistically insignificant, the analyst should either conclude that there may not be a difference between alternatives, or conduct additional runs if detecting the potentially small difference between alternatives is important.
-
--   **Statistically significant does not necessarily mean practically significant.** Statistical t-tests can be easily gamed to achieve significance by simply increasing the sample size (number of runs). The t-test is like a detective, not a jury, meaning that the test results point to something that may be interesting but do not have the final say in making decisions. The analyst/project team makes decisions, not the model or math. Differences between alternatives always need to be viewed from a practical perspective to decide if they are important or meaningful. Also, statistically significant results do not necessarily mean that the model is high quality. Model assumptions and limitations also need to be taken into consideration when interpreting results.
-
--   Acknowledge things beyond t-tests, ANOVA, etc
-
--   TODO: Notes about common themes in traffic literature regarding number of runs. Most Lit focuses on issue \#1.
-
-<!-- -->
-
--   Few runs or low statistical confidence does make a model bad or wrong; however, the results require more careful interpretation.
-
--   **Do t-tests to make comparisons between alternatives at important locations in the model.** If the t-test results are unexpected, or if the analyst is not comfortable with the precision obtained from 10 runs, then this may be an indication that more runs are needed.
-
--   
-
-### Overview {.unnumbered}
+## Background on the Statistics {.unnumbered}
 
 Traffic simulation models use random variables to mimic distributions of real-world phenomena such as vehicle departure times, traffic compositions (mix of passenger cars & trucks), driver behaviors, and others. By repeatedly running the model with different values for the random variables, the outputs reflect a range of results. Interpreting the range of results requires careful thinking in order to avoid the following issues:
 
-1.  Avoid mis-representing uncertainty in the simulation process.
-2.  Avoid mis-interpreting comparisons between simulation scenarios.
+1.  Mis-representing uncertainty in the simulation process.
+2.  Mis-interpreting comparisons between simulation scenarios.
 
-These two issues can be minimized with the help of statistics. A traffic simulation model is like a [black box](https://en.wikipedia.org/wiki/Black_box): enter data, run the model, get a result. Each time the model is run, a different result is returned due to the random components in the model. Repeatedly running the model becomes a random sampling problem. While the model cannot be run an infinite number of times to obtain the true average, a sample of several runs can allow inferences about the overall process. Statistical tools like averages, standard deviation, confidence intervals, t-tests, and others can help interpret the sampled results.
+These two issues can be minimized with the help of statistics. Statistical tools like averages, standard deviation, confidence intervals, t-tests, and others can help interpret the sampled results.
 
-To help answer the question *how many simulation runs are needed,* the two issues listed above are discussed further in the next sections.
+To help answer the question *how many simulation runs are needed,* the two issues listed above are explored in the next sections.
 
-## Avoiding \#1: Mis-representing Process Uncertainty {.unnumbered}
+## Avoiding Issue #1: Mis-representing Process Uncertainty {.unnumbered}
 
-We need to do *enough* simulation runs so that the sample average is representative of the overall simulation process (i.e. representative of the long-term process average, or population average). If we simply conduct one simulation run, we have no way of knowing if it is representative; the next run simulation run could be very different due to the random components in the simulation model. By collecting results from multiple runs, we can obtain a sample mean (average), standard deviation, and build a [confidence interval](#) to represent the overall simulation process.
+Traffic engineering literature tends to focus on Issue #1 because traffic analysis typically starts with one model (existing conditions). An initial set of runs lets the analyst explore the variability (uncertainty) in simulation process.
 
-How to estimate the number of runs required to avoid issue \#1:
+A traffic simulation model is like a [black box](https://en.wikipedia.org/wiki/Black_box): enter data, run the model, get a result. Each time the model is run, a different result is returned due to the random components in the model. Simply conducting one simulation run leaves no way to know if it is representative; the next run simulation run could be very different due to the randomness.
 
-1.  Choose a measure of effectiveness (MOE) and location of interest in the model. The MOE and location should be related to the purpose of the model. For example, if the purpose of the model is to investigate how an alternative may affect travel time along a particular section, then choosing the travel time between two critical points in the model would be appropriate. Another example could be choosing level of service at an intersection where alternative configurations are being considered.
-2.  Conduct an initial set of runs. Doing 10 runs is suggested, if this amount is practical in terms of computation time. Obtain the average and standard deviation for the MOE of interest.
-3.  Check E from the initial set of runs. Decide if E is acceptable. Acceptability is a practical issue, not a statistics issue.
-
-...
-
-1.  Use the [formula] discussed below to estimate how many runs would be required to obtain a user-specified [margin of error].
-2.  If the [formula] suggests more simulation runs are needed, the actual obtained margin of error $E$ from the initial set of runs should inspected as it may be close enough for practical purposes. (TODO: provide an example/link to an example.) Adjusting expectations regarding margin of error and/or confidence level may be necessary in order to maintain a practical number of runs. A wide margin of error or lower confidence level does not mean that the model is somehow bad or useless, it just means that the final results may not be as precise as originally intended. Using statistics to compare results in these cases can still help avoid erroneous conclusions. A power analysis should also be conducted to see if the initial number of runs allows detecting a reasonable effect size. (TODO: hyperlink). If a wider margin of error, lower confidence, or large minimum effect size cannot be accepted, then conduct the additional runs as indicated by the formulas.
-3.  Report performance measure results based on the final number of runs. Use the t-statistic when reporting confidence intervals or doing paired tests.
-
-TODO: Discuss why use issue \#1 first. Because of existing conditions need an initial estimate of number of runs. Haven't done alternatives to know how many runs are needed for each scenario. Starting project is a blank slate, Need to start somewhere. Don't over-complicate it by introducing field data.
-
-Issue \#1 is analogous to a "continuous outcome, one sample (process) problem" Want to know if the simulation results obtained are typical of the process. Analogous to asking a friend to roll an unknown number of dice and asking the friend for the sum of the dice. How many rolls do you need to do? Theoretical mean is unknown (known only by the friend).
+Repeatedly running the model is analogous to a "continuous outcome, one process" random sampling problem, such as asking a friend to roll an unknown number of dice and asking the friend for the sum of the dice. How many rolls do you need to do before you have a good feel for the typical sum of the dice? Infinitely rolling dice to obtain the true average is impractical. Instead, a sample of several rolls (model runs) can allow inferences about the overall process. The sample average, standard deviation, and a [confidence interval](#) can be constructed to represent the overall simulation process.
 
 ### Formula {.unnumbered}
 
-Estimating *how many runs is enough* can be accomplished by re-arranging the confidence interval formula. Solving for sample size, the formula is as follows:
+Estimating *how many runs is enough* to address issue #1 can be accomplished by re-arranging the [confidence interval](#) formula. Solving for sample size, the formula is as follows:
 
 $$
 N \ge \left(\frac{z_{\alpha/2}*\sigma}{E}\right)^2
@@ -152,14 +97,14 @@ TODO: Caution that sample size formulas may look different depending on the lite
 
 ### Margin of Error {.unnumbered}
 
-The margin of error, $E$, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results. **The value of** $E$ **is a judgement call**. The analyst must decide how wide of a confidence interval is too wide to be useful given the context of the problem they are trying to solve and the constraints they are working within. Their decision is not a matter of statistics, but rather a matter of practical application. **TODO cite source** [\<https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html\>](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html){.uri} has a good quote that E is not a statistical issue. Here are some examples regarding choosing $E$:
+The margin of error, $E$, in the sample size formula is an input by the analyst regarding how wide of a confidence interval they are willing to accept when estimating the overall simulation average and reporting results. **The value of** $E$ **is a judgement call**. The analyst must decide how wide of a confidence interval is too wide to be useful given the context of the problem they are trying to solve and the constraints they are working within. Their decision is not a matter of statistics, but rather a matter of practical application. **TODO cite source** [\<https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html>](https://sphweb.bumc.bu.edu/otlt/mph-modules/bs/bs704_power/bs704_power2.html){.uri} has a good quote that E is not a statistical issue. Here are some examples regarding choosing $E$:
 
 -   Some traffic engineering literature uses $E = sample\ mean * 10\%$. So if the sample mean is 15, then $E = 15 * 0.10 = 1.5$ This says that the number of runs conducted should result in a 95% confidence interval within +/- 10% of the sample mean. [TODO: cite sources](#)
 
--   Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding issue \#1, the goal of the confidence interval is to answer to the question *are the sample results representative of the overall simulation process?* This question is a *separate question* from how the simulation compares to field data (calibration), which is more related to estimating sample sizes for [comparing scenarios](#). For the purposes of avoiding issue \#1, choosing an acceptable margin of error E is entirely concerned with the simulation process, not field data. Using field variability to estimate simulation sample size may not be appropriate, or may lead to unreasonable sample sizes. Especially if there is a mismatch between the field and simulated sources, or magnitude, of variability.
+-   Other traffic engineering literature uses field data to estimate the margin of error. [TODO: cite sources](#) However, going back to the root of avoiding issue #1, the goal of the confidence interval is to answer to the question *are the sample results representative of the overall simulation process?* This question is a *separate question* from how the simulation compares to field data (calibration), which is more related to estimating sample sizes for [comparing scenarios](#). For the purposes of avoiding issue #1, choosing an acceptable margin of error E is entirely concerned with the simulation process, not field data. Using field variability to estimate simulation sample size may not be appropriate, or may lead to unreasonable sample sizes. Especially if there is a mismatch between the field and simulated sources, or magnitude, of variability.
 
-    -   For example, the field data may come from a relatively homogenous group of observations with little variability. However, there may be underlying assumptions or behaviors in the model that are out of the users control that lead to higher variability in the simulation outputs. Expecting low variability in the simulation results could lead to a high number of runs. Attempting to control the simulation variability may create an unrealistic expectation that the simulation should act deterministically and could tempt the analyst to overconstrain model parameters. Neither attempting to control the variability, nor conducting a high number of runs is efficient from a practical perspective.
-    -   The literature recognizes that using field data could lead to a high number of runs and suggests 5% of the mean as a minimum margin of error ([2019 TAT III](#)). If using a 5% minimum based on judgement, then why not just use 5% as a conservative value instead of making assumptions based on field data? If 5% requires too many runs to be practical, then try 10% or other compromise, or do the minimum practical number of runs that the analyst feels can still produce a reasonable estimate (confidence interval) for the simulation average. (If considering the number of runs required for comparing scenarios, see discussion on [issue \#2](#).)
+    -   For example, the field data may come from a relatively homogeneous group of observations with little variability. However, there may be underlying assumptions or behaviors in the model that are out of the users control that lead to higher variability in the simulation outputs. Expecting low variability in the simulation results could lead to a high number of runs. Attempting to control the simulation variability may create an unrealistic expectation that the simulation should act deterministically and could tempt the analyst to overconstrain model parameters. Neither attempting to control the variability, nor conducting a high number of runs is efficient from a practical perspective.
+    -   The literature recognizes that using field data could lead to a high number of runs and suggests 5% of the mean as a minimum margin of error ([2019 TAT III](#)). If using a 5% minimum based on judgement, then why not just use 5% as a conservative value instead of making assumptions based on field data? If 5% requires too many runs to be practical, then try 10% or other compromise, or do the minimum practical number of runs that the analyst feels can still produce a reasonable estimate (confidence interval) for the simulation average. (If considering the number of runs required for comparing scenarios, see discussion on [issue #2](#).)
 
 The number of simulation runs does not distinguish a crappily calibrated model from a well-calibrated model. A tight confidence interval can be obtained from a simulation that is not well-calibrated by simply taking a large sample of runs. Conversely, a high-quality, well-calibrated simulation might have a wide confidence interval, even with a large sample, if the underlying simulation is highly variable.
 
@@ -167,7 +112,7 @@ The number of simulation runs does not distinguish a crappily calibrated model f
 
 **TODO include examples of how to use the formula**
 
-## Avoiding \#2: Mis-interpreting Scenario Comparisons {.unnumbered}
+## Avoiding Issue #2: Mis-interpreting Scenario Comparisons {.unnumbered}
 
 Comparisons between simulation models need to consider the distribution of simulation outputs in order to avoid reporting differences that could be due to random chance. Average results from two simulation scenarios may look different, but statistically may not be different due to the distribution, or uncertainty, surrounding the averages. The meaning of *statistically different* and *practically different* is another topic. Just because two results may be statistically different does not necessarily mean that the differences are important for real-world decision making.
 
@@ -205,9 +150,21 @@ $$
 
 **TODO** show example tables of n-runs vs effect size
 
-### Random thoughts {.unnumbered}
+## **A few notes about statistics** {#stat-notes .unnumbered}
 
-t-test is a detective, not a jury.
+-   **Statistics are useful to avoid concluding that two results are different when they may not be.** For example, if one model has an average travel time of 10.0 minutes, and an alternative model has an average of 9.7 minutes. The difference between results could be due to random chance if the model variability is high enough and/or the number of runs is too low to detect a difference of 0.3 minutes. If a t-test comes back statistically insignificant, the analyst should either conclude that there may not be a difference between alternatives, or conduct additional runs if detecting the potentially small difference between alternatives is important.
+
+-   **Statistically significant does not necessarily mean practically significant.** Statistical t-tests can be easily gamed to achieve significance by simply increasing the sample size (number of runs). The t-test results (p-values) are a detective, not a jury (TODO: CITE NOVA), meaning that the test results point to something that may be interesting but do not have the final say in making decisions. The analyst/project team makes decisions, not the model or math. Differences between alternatives always need to be viewed from a practical perspective to decide if they are important or meaningful. Also, statistically significant results do not necessarily mean that the model is high quality. Model assumptions and limitations also need to be taken into consideration when interpreting results. p-value is a detective, not a jury. <https://www.pbs.org/video/what-p-value-wmmwgl/> NOVA Season 45 Episode 6 Prediction by the Numbers Jordan Ellenberg (UW Madison)
+
+-   Acknowledge things beyond t-tests, ANOVA, etc
+
+-   
+
+<!-- -->
+
+-   Few runs or low statistical confidence does make a model bad or wrong; however, the results require more careful interpretation.
+
+## Random thoughts {.unnumbered}
 
 If you are using a t-test to decide if two simulation models are difference, then the difference between alternatives probably too small to be practical (i.e. if the simulation results are not painfully different, then the real-world differences are probably not going to be practically different)
 
@@ -216,3 +173,21 @@ If you are using a t-test to decide if two simulation models are difference, the
 use z instead of t as a simplifying assumption to make the math easier for the purposes of estimating sample size. We're making estimates of sigma, delta, so it's an approximate formula anyway. when reporting actual results or doing comparisons, recommend using t-dist.
 
 rule of thumb for estimating if variances can be pooled: Divide variances. If result is b/n 0.5 to 2.0 then they can be pooled. <https://online.stat.psu.edu/stat500/lesson/7/7.3/7.3.1/7.3.1.1>
+
+old thoughts on issue #1:
+
+How to estimate the number of runs required to avoid issue #1:
+
+1.  Choose a measure of effectiveness (MOE) and location of interest in the model. The MOE and location should be related to the purpose of the model. For example, if the purpose of the model is to investigate how an alternative may affect travel time along a particular section, then choosing the travel time between two critical points in the model would be appropriate. Another example could be choosing level of service at an intersection where alternative configurations are being considered.
+2.  Conduct an initial set of runs. Doing 10 runs is suggested, if this amount is practical in terms of computation time. Obtain the average and standard deviation for the MOE of interest.
+3.  Check E from the initial set of runs. Decide if E is acceptable. Acceptability is a practical issue, not a statistics issue.
+
+...
+
+1.  Use the [formula] discussed below to estimate how many runs would be required to obtain a user-specified [margin of error].
+
+2.  If the [formula] suggests more simulation runs are needed, the actual obtained margin of error $E$ from the initial set of runs should inspected as it may be close enough for practical purposes. (TODO: provide an example/link to an example.) Adjusting expectations regarding margin of error and/or confidence level may be necessary in order to maintain a practical number of runs. A wide margin of error or lower confidence level does not mean that the model is somehow bad or useless, it just means that the final results may not be as precise as originally intended. Using statistics to compare results in these cases can still help avoid erroneous conclusions. A power analysis should also be conducted to see if the initial number of runs allows detecting a reasonable effect size. (TODO: hyperlink). If a wider margin of error, lower confidence, or large minimum effect size cannot be accepted, then conduct the additional runs as indicated by the formulas.
+
+3.  Report performance measure results based on the final number of runs. Use the t-statistic when reporting confidence intervals or doing paired tests.
+
+`r if (knitr::is_html_output()) '## References {.unnumbered}'`
