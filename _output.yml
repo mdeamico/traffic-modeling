@@ -1,6 +1,9 @@
-bookdown::gitbook:
-    split_by: section
-    toc_depth: 2
-    config:
-      toc:
-        collapse: section
+bookdown::bs4_book:
+  template: "bs4_book_template.html"
+  theme:
+    primary: "#3F708D"
+  split_by: section
+  toc_depth: 2
+  config:
+    toc:
+      collapse: section
