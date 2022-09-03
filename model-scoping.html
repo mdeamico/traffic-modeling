@@ -1,132 +1,76 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Model Scoping | Traffic Modeling</title>
-  <meta name="description" content="2 Model Scoping | Traffic Modeling" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="2 Model Scoping | Traffic Modeling" />
-  <meta property="og:type" content="book" />
-  
-  
-  
-  
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Model Scoping | Traffic Modeling" />
-  
-  
-  
-
-<meta name="author" content="Michael DeAmico and Collaborators" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="existing-resources.html"/>
-<link rel="next" href="do-you-need-a-model-at-all.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
-
-
-
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Model Scoping | Traffic Modeling</title>
+<meta name="author" content="Michael DeAmico and Collaborators">
+<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta property="og:title" content="2 Model Scoping | Traffic Modeling">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2 Model Scoping | Traffic Modeling">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><meta name="description" content="Microsimulation is like a microscope. It is a very effective tool when you have it pointed at the correct subject. Tightly focused scopes of work ensure cost-effective microsimulation analyses....">
+<meta property="og:description" content="Microsimulation is like a microscope. It is a very effective tool when you have it pointed at the correct subject. Tightly focused scopes of work ensure cost-effective microsimulation analyses....">
+<meta name="twitter:description" content="Microsimulation is like a microscope. It is a very effective tool when you have it pointed at the correct subject. Tightly focused scopes of work ensure cost-effective microsimulation analyses....">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="license.html"><a href="license.html"><i class="fa fa-check"></i>License</a></li>
-<li class="chapter" data-level="" data-path="disclaimer.html"><a href="disclaimer.html"><i class="fa fa-check"></i>Disclaimer</a></li>
-<li class="chapter" data-level="" data-path="contribute.html"><a href="contribute.html"><i class="fa fa-check"></i>Contribute</a>
-<ul>
-<li class="chapter" data-level="" data-path="code-of-conduct.html"><a href="code-of-conduct.html"><i class="fa fa-check"></i>Code of Conduct</a></li>
-</ul></li>
-<li class="part"><span><b>I General Guidance</b></span></li>
-<li class="chapter" data-level="1" data-path="existing-resources.html"><a href="existing-resources.html"><i class="fa fa-check"></i><b>1</b> Existing Resources</a></li>
-<li class="chapter" data-level="2" data-path="model-scoping.html"><a href="model-scoping.html"><i class="fa fa-check"></i><b>2</b> Model Scoping</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="do-you-need-a-model-at-all.html"><a href="do-you-need-a-model-at-all.html"><i class="fa fa-check"></i><b>2.1</b> Do you Need A Model at All?</a></li>
-<li class="chapter" data-level="2.2" data-path="should-you-use-microsimulation.html"><a href="should-you-use-microsimulation.html"><i class="fa fa-check"></i><b>2.2</b> Should you use Microsimulation?</a></li>
-<li class="chapter" data-level="2.3" data-path="Other-Questions.html"><a href="Other-Questions.html"><i class="fa fa-check"></i><b>2.3</b> Additional Questions to Consider when Scoping</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="data-collection.html"><a href="data-collection.html"><i class="fa fa-check"></i><b>3</b> Data Collection</a></li>
-<li class="chapter" data-level="4" data-path="existing-model-coding.html"><a href="existing-model-coding.html"><i class="fa fa-check"></i><b>4</b> Existing Model Coding</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="working-as-a-team.html"><a href="working-as-a-team.html"><i class="fa fa-check"></i><b>4.1</b> Working as a Team</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="existing-model-calibration.html"><a href="existing-model-calibration.html"><i class="fa fa-check"></i><b>5</b> Existing Model Calibration</a></li>
-<li class="chapter" data-level="6" data-path="model-outputs.html"><a href="model-outputs.html"><i class="fa fa-check"></i><b>6</b> Model Outputs</a></li>
-<li class="chapter" data-level="7" data-path="documentation.html"><a href="documentation.html"><i class="fa fa-check"></i><b>7</b> Documentation</a></li>
-<li class="chapter" data-level="8" data-path="peer-review.html"><a href="peer-review.html"><i class="fa fa-check"></i><b>8</b> Peer Review</a></li>
-<li class="chapter" data-level="9" data-path="forecasting.html"><a href="forecasting.html"><i class="fa fa-check"></i><b>9</b> Forecasting</a></li>
-<li class="chapter" data-level="10" data-path="alternative-scenarios.html"><a href="alternative-scenarios.html"><i class="fa fa-check"></i><b>10</b> Alternative Scenarios</a></li>
-<li class="part"><span><b>II Software-Specific Guidance</b></span></li>
-<li class="chapter" data-level="11" data-path="Vissim-Model-Coding.html"><a href="Vissim-Model-Coding.html"><i class="fa fa-check"></i><b>11</b> Vissim</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="freeways.html"><a href="freeways.html"><i class="fa fa-check"></i><b>11.1</b> Freeways</a></li>
-<li class="chapter" data-level="11.2" data-path="signalized-intersections.html"><a href="signalized-intersections.html"><i class="fa fa-check"></i><b>11.2</b> Signalized Intersections</a></li>
-<li class="chapter" data-level="11.3" data-path="roundabouts.html"><a href="roundabouts.html"><i class="fa fa-check"></i><b>11.3</b> Roundabouts</a></li>
-<li class="chapter" data-level="11.4" data-path="stop-control.html"><a href="stop-control.html"><i class="fa fa-check"></i><b>11.4</b> Stop Control</a></li>
-</ul></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Traffic Modeling</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Traffic Modeling</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Preface</a></li>
+<li><a class="" href="license.html">License</a></li>
+<li><a class="" href="disclaimer.html">Disclaimer</a></li>
+<li><a class="" href="contribute.html">Contribute</a></li>
+<li class="book-part">General Guidance</li>
+<li><a class="" href="existing-resources.html"><span class="header-section-number">1</span> Existing Resources</a></li>
+<li><a class="active" href="model-scoping.html"><span class="header-section-number">2</span> Model Scoping</a></li>
+<li><a class="" href="data-collection.html"><span class="header-section-number">3</span> Data Collection</a></li>
+<li><a class="" href="existing-model-coding.html"><span class="header-section-number">4</span> Existing Model Coding</a></li>
+<li><a class="" href="existing-model-calibration.html"><span class="header-section-number">5</span> Existing Model Calibration</a></li>
+<li><a class="" href="model-outputs.html"><span class="header-section-number">6</span> Model Outputs</a></li>
+<li><a class="" href="documentation.html"><span class="header-section-number">7</span> Documentation</a></li>
+<li><a class="" href="peer-review.html"><span class="header-section-number">8</span> Peer Review</a></li>
+<li><a class="" href="forecasting.html"><span class="header-section-number">9</span> Forecasting</a></li>
+<li><a class="" href="alternative-scenarios.html"><span class="header-section-number">10</span> Alternative Scenarios</a></li>
+<li class="book-part">Software-Specific Guidance</li>
+<li><a class="" href="Vissim-Model-Coding.html"><span class="header-section-number">11</span> Vissim</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="model-scoping" class="section level1" number="2">
-<h1><span class="header-section-number">2</span> Model Scoping</h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-scoping" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Model Scoping<a class="anchor" aria-label="anchor" href="#model-scoping"><i class="fas fa-link"></i></a>
+</h1>
 <blockquote>
 <p>Microsimulation is like a microscope.
 It is a very effective tool when you have it pointed at the correct subject.
 Tightly focused scopes of work ensure cost-effective microsimulation analyses.
-<br>
-<em>–From the FHWA Traffic Analysis Toolbox Volume 3</em></p>
+<br><em>–From the FHWA Traffic Analysis Toolbox Volume 3</em></p>
 </blockquote>
 <p>The “micro” in microsimulation tells you everything you need to know:</p>
 <ul>
@@ -136,71 +80,143 @@ Tightly focused scopes of work ensure cost-effective microsimulation analyses.
 <p>Keeping things small is a reocurring theme in scoping because resources are finite.
 So small that it is worthwhile to consider:</p>
 <ul>
-<li><a href="do-you-need-a-model-at-all.html#do-you-need-a-model-at-all">Do you Need A Model at All?</a></li>
-<li><a href="should-you-use-microsimulation.html#should-you-use-microsimulation">Should you use Microsimulation?</a></li>
-<li><a href="Other-Questions.html#Other-Questions">Other Questions</a></li>
+<li><a href="model-scoping.html#do-you-need-a-model-at-all">Do you Need A Model at All?</a></li>
+<li><a href="model-scoping.html#should-you-use-microsimulation">Should you use Microsimulation?</a></li>
+<li><a href="model-scoping.html#Other-Questions">Other Questions</a></li>
+</ul>
+<div id="do-you-need-a-model-at-all" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Do you Need A Model at All?<a class="anchor" aria-label="anchor" href="#do-you-need-a-model-at-all"><i class="fas fa-link"></i></a>
+</h2>
+<p>If a project being scoped is tackling an observable issue, collecting and analyzing field data may be enough to make a decision (analysis does not have to equal modeling). For example:</p>
+<ul>
+<li>
+<em>Problem:</em> A temporary work zone is observed to cause queues about an hour before opening to traffic. <em>Analysis:</em> Collect volume and queue data, try shifting work zone hours to times with lower volumes.</li>
+<li>
+<em>Problem:</em> A freeway with several closely-spaced on-ramps experiences congestion. <em>Analysis:</em> Collect volume and speed data. Look at the potential for alternate routes. Close a ramp and collect data during the closure to see the problem is improved.</li>
+</ul>
+<p>The above freeway example may seem bold by conducting live experiments in the field. <strong>Field data always beats model results.</strong> If alternatives are “subtractive” (i.e. taking away something, like a lane, ramp, signals, etc), putting out construction barrels to try out an idea will always result in better results than a model. Real drivers will be reacting to real field conditions instead of hypothetical modeled condtions. Field experimentation may be faster and more effective than developing models because seeing is believing. The same goes for “low-risk” alternatives such as trying a mini-roundabout in a neighborhood. Do public outreach, put out some barrels, and give it a try.</p>
+</div>
+<div id="should-you-use-microsimulation" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Should you use Microsimulation?<a class="anchor" aria-label="anchor" href="#should-you-use-microsimulation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Consider an analogy to signal warrants: Traffic signal warrants are as much about preventing installation of unnecessary signals as they are about helping determine when traffic signals are appropriate. While there are no formal “microsimulation warrants,” the following questions will help guide you to determine if microsimulation may be useful and prevent you from many headaches. Microsimulation <em>may</em> be useful if you answer <strong>YES</strong> to any of the following:</p>
+<ul>
+<li>Existing or alternative scenarios cannot be modeled without microsimulation (i.e. simpler analysis tools are available for analyzing the scenarios).</li>
+<li>Non-microsimulation tools will not provide the degree of precision required for the project objectives.</li>
+<li>Experienced staff can commit extensive time to the project to deal with the complexity and data challenges that come with simulation</li>
+<li>Time and budget will allow for detailed calibration of existing conditions.</li>
+<li>Time and budget will allow for error checking and multiple simulation runs.</li>
+<li>The area of interest has limited spatial and temporal extents to allow for reasonable compute times per run.
+<ul>
+<li>If the purpose is to answer “big picture,” or network-wide effects, microsimulation is probably not the best choice. Large-scale alternatives may also rule out microsimulation. Knowing the purpose helps scope the right type of model and model limits.</li>
+</ul>
+</li>
+<li>The number of scnearios to simulate is small (for example: existing year, future no-build, 1 alternative).</li>
+<li>The scope is well defined and a plan is in place to manage scope creep.</li>
+</ul>
+<p>If you have made it this far and decided that <em>yes</em> a model is needed, and <em>yes</em> microsimulation is the most likely tool, there are still more questions to consider for scoping. These questions may or may not change your mind about using microsimulation.</p>
+</div>
+<div id="Other-Questions" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Additional Questions to Consider when Scoping<a class="anchor" aria-label="anchor" href="#Other-Questions"><i class="fas fa-link"></i></a>
+</h2>
+<div id="what-is-the-model-purpose" class="section level3" number="2.3.1">
+<h3>
+<span class="header-section-number">2.3.1</span> What is the Model purpose?<a class="anchor" aria-label="anchor" href="#what-is-the-model-purpose"><i class="fas fa-link"></i></a>
+</h3>
+<p>Models are not the only factor in the decision making process. Physical, financial, environmental, and other factors often play more important roles than traffic models. However, models do serve a purpose:</p>
+<ul>
+<li>
+<strong>Models help with complex alternative analysis.</strong> When alternatives cannot be safely or efficently field tested, modeling can help evaluate alternatives. Having an idea of what alternatives may be considered helps with scoping.</li>
+<li>
+<strong>Models are conversation pieces.</strong> Models provide something to talk about when discussing existing conditions and alternatives. Detailed modeling involves gathering data and having discussions, which can be more important than the model results themselves. If the model gets people talking about problems and ideas, then the model has probably been worthwhile, even if it has limitations.</li>
 </ul>
 </div>
-            </section>
+<div id="what-questions-will-the-model-answer" class="section level3" number="2.3.2">
+<h3>
+<span class="header-section-number">2.3.2</span> What question(s) will the model answer?<a class="anchor" aria-label="anchor" href="#what-questions-will-the-model-answer"><i class="fas fa-link"></i></a>
+</h3>
+<p>Related to model purpose, asking a specific question of the model helps to scope the right model extents. The more focused the question, the better for microsimulation. Asking “how will changing this weaving configuration affect throughput?” is a better question than something more generic like “what is the Level of Service?” Generic questions can likely be answered by more efficient means than microsimulation.</p>
+</div>
+<div id="what-data-is-available" class="section level3" number="2.3.3">
+<h3>
+<span class="header-section-number">2.3.3</span> What data is available?<a class="anchor" aria-label="anchor" href="#what-data-is-available"><i class="fas fa-link"></i></a>
+</h3>
+<p>Lack of field data can rule out microsimulation, or severely limit its accuracy. Without field data, model calibration may not be achievable, which detracts from the models believability.</p>
+</div>
+<div id="what-scenarios-are-being-considered" class="section level3" number="2.3.4">
+<h3>
+<span class="header-section-number">2.3.4</span> What scenarios are being considered?<a class="anchor" aria-label="anchor" href="#what-scenarios-are-being-considered"><i class="fas fa-link"></i></a>
+</h3>
+<p>Just existing year? Future years? Each scenario increases the time effort to complete the microsimulation. Limit the number of scenarios during scoping. For example consider analyzing only one or two alternatives with microsimulation. Small variations of one alternative may not be worthwhile to simulate.</p>
+</div>
+<div id="what-are-the-model-spatial-limits" class="section level3" number="2.3.5">
+<h3>
+<span class="header-section-number">2.3.5</span> What are the model spatial limits?<a class="anchor" aria-label="anchor" href="#what-are-the-model-spatial-limits"><i class="fas fa-link"></i></a>
+</h3>
+<p>TODO</p>
+</div>
+<div id="what-are-the-model-temporal-limits" class="section level3" number="2.3.6">
+<h3>
+<span class="header-section-number">2.3.6</span> What are the model temporal limits?<a class="anchor" aria-label="anchor" href="#what-are-the-model-temporal-limits"><i class="fas fa-link"></i></a>
+</h3>
+<p>TODO</p>
+</div>
+<div id="what-is-the-model-output-performance-measures" class="section level3" number="2.3.7">
+<h3>
+<span class="header-section-number">2.3.7</span> What is the model output / performance measures?<a class="anchor" aria-label="anchor" href="#what-is-the-model-output-performance-measures"><i class="fas fa-link"></i></a>
+</h3>
+<p>TODO</p>
 
-          </div>
-        </div>
-      </div>
-<a href="existing-resources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="do-you-need-a-model-at-all.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="existing-resources.html"><span class="header-section-number">1</span> Existing Resources</a></div>
+<div class="next"><a href="data-collection.html"><span class="header-section-number">3</span> Data Collection</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#model-scoping"><span class="header-section-number">2</span> Model Scoping</a></li>
+<li><a class="nav-link" href="#do-you-need-a-model-at-all"><span class="header-section-number">2.1</span> Do you Need A Model at All?</a></li>
+<li><a class="nav-link" href="#should-you-use-microsimulation"><span class="header-section-number">2.2</span> Should you use Microsimulation?</a></li>
+<li>
+<a class="nav-link" href="#Other-Questions"><span class="header-section-number">2.3</span> Additional Questions to Consider when Scoping</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-is-the-model-purpose"><span class="header-section-number">2.3.1</span> What is the Model purpose?</a></li>
+<li><a class="nav-link" href="#what-questions-will-the-model-answer"><span class="header-section-number">2.3.2</span> What question(s) will the model answer?</a></li>
+<li><a class="nav-link" href="#what-data-is-available"><span class="header-section-number">2.3.3</span> What data is available?</a></li>
+<li><a class="nav-link" href="#what-scenarios-are-being-considered"><span class="header-section-number">2.3.4</span> What scenarios are being considered?</a></li>
+<li><a class="nav-link" href="#what-are-the-model-spatial-limits"><span class="header-section-number">2.3.5</span> What are the model spatial limits?</a></li>
+<li><a class="nav-link" href="#what-are-the-model-temporal-limits"><span class="header-section-number">2.3.6</span> What are the model temporal limits?</a></li>
+<li><a class="nav-link" href="#what-is-the-model-output-performance-measures"><span class="header-section-number">2.3.7</span> What is the model output / performance measures?</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Traffic Modeling</strong>" was written by Michael DeAmico and Collaborators.  <a class="text-light" href="disclaimer.html">Disclaimer</a></p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": null,
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
