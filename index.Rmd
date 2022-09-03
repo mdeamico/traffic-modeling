@@ -3,6 +3,9 @@ title: "Traffic Modeling"
 author: "Michael DeAmico and Collaborators"
 site: bookdown::bookdown_site
 documentclass: book
+bibliography: ["chapters/references.bib"]
+biblio-style: "apalike"
+link-citations: true
 ---
 # Preface {-}
 
